@@ -2,96 +2,360 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Glorb Tools</title>
 
 <style>
-body {
-    margin: 0;
-    font-family: monospace;
-    background: #0f0f0f;
-    color: #e6e6e6;
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+:root {
+    --black: #000000;
+    --green: #00ff00;
+    --text: #f2fff2;
+    --muted: #a8b8a8;
+    --line: rgba(0, 255, 0, 0.22);
+    --panel: rgba(0, 255, 0, 0.045);
 }
 
-.container {
-    max-width: 800px;
-    margin: 60px auto;
-    padding: 20px;
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: "Share Tech Mono", Consolas, monospace;
+    background:
+        linear-gradient(180deg, rgba(0, 255, 0, 0.07), transparent 280px),
+        var(--black);
+    color: var(--text);
+}
+
+a {
+    color: inherit;
+}
+
+.page {
+    width: min(1080px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 28px 0 40px;
+}
+
+.topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    padding: 14px 0 24px;
+    border-bottom: 1px solid var(--line);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+}
+
+.mark {
+    width: 38px;
+    height: 38px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--green);
+    background: var(--green);
+    color: var(--black);
+    font-weight: 700;
+    box-shadow: 0 0 22px rgba(0, 255, 0, 0.28);
+}
+
+.brand-title {
+    margin: 0;
+    color: var(--green);
+    font-size: 18px;
+    letter-spacing: 0;
+    white-space: nowrap;
+}
+
+.brand-subtitle {
+    margin: 2px 0 0;
+    color: var(--muted);
+    font-size: 13px;
+}
+
+.nav-actions {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.hero {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+    gap: 32px;
+    align-items: end;
+    padding: 56px 0 36px;
+}
+
+.eyebrow {
+    margin: 0 0 12px;
+    color: var(--green);
+    font-size: 14px;
+    text-transform: uppercase;
 }
 
 h1 {
-    color: #7CFF6B;
+    margin: 0;
+    color: var(--text);
+    font-size: clamp(40px, 6vw, 76px);
+    line-height: 0.95;
+    letter-spacing: 0;
+}
+
+.hero-copy {
+    max-width: 650px;
+    margin: 18px 0 0;
+    color: var(--muted);
+    font-size: 18px;
+    line-height: 1.7;
+}
+
+.status-panel {
+    border: 1px solid var(--line);
+    background: var(--panel);
+    padding: 22px;
+}
+
+.status-panel h2 {
+    margin: 0 0 18px;
+    color: var(--green);
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.metric {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    padding: 12px 0;
+    border-top: 1px solid rgba(0, 255, 0, 0.16);
+    color: var(--muted);
+}
+
+.metric strong {
+    color: var(--text);
+    font-weight: 600;
+}
+
+.toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin: 8px 0 18px;
+}
+
+.toolbar h2 {
+    margin: 0;
+    color: var(--green);
+    font-size: 22px;
+}
+
+.tool-count {
+    color: var(--muted);
+    font-size: 14px;
+}
+
+.tool-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
 }
 
 .tool {
-    padding: 8px 0;
-    border-bottom: 1px solid #222;
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    min-height: 88px;
+    padding: 18px;
+    border: 1px solid var(--line);
+    background: rgba(0, 0, 0, 0.68);
+    transition: border-color 160ms ease, background 160ms ease, transform 160ms ease;
 }
 
-.name {
-    color: #7CFF6B;
+.tool:hover {
+    transform: translateY(-2px);
+    border-color: var(--green);
+    background: rgba(0, 255, 0, 0.07);
 }
 
-.desc {
-    color: #aaa;
+.tool-index {
+    flex: 0 0 auto;
+    width: 34px;
+    height: 34px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--green);
+    color: var(--green);
+    font-size: 13px;
 }
 
-/* DOWNLOAD BUTTON */
-.download-btn {
-    display: inline-block;
-    margin-top: 25px;
-    padding: 10px 14px;
-    border: 1px solid #7CFF6B;
-    color: #7CFF6B;
-    background: #0f0f0f;
+.tool-name {
+    margin: 0 0 6px;
+    color: var(--green);
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.tool-description {
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.5;
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    padding: 11px 16px;
+    border: 1px solid var(--green);
+    color: var(--green);
+    background: transparent;
     text-decoration: none;
-    font-family: monospace;
-    transition: 0.2s ease;
+    font-size: 15px;
+    transition: background 160ms ease, color 160ms ease, box-shadow 160ms ease;
 }
 
-.download-btn:hover {
-    background: #7CFF6B;
-    color: #0f0f0f;
+.button:hover,
+.button:focus-visible {
+    color: var(--black);
+    background: var(--green);
+    box-shadow: 0 0 24px rgba(0, 255, 0, 0.32);
+    outline: none;
+}
+
+.button.primary {
+    color: var(--black);
+    background: var(--green);
+}
+
+.button.primary:hover,
+.button.primary:focus-visible {
+    box-shadow: 0 0 28px rgba(0, 255, 0, 0.45);
 }
 
 .footer {
-    margin-top: 40px;
-    color: #555;
-    font-size: 12px;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 36px;
+    padding-top: 22px;
+    border-top: 1px solid var(--line);
+    color: var(--muted);
+    font-size: 14px;
+}
+
+@media (max-width: 780px) {
+    .page {
+        width: min(100% - 24px, 640px);
+        padding-top: 18px;
+    }
+
+    .topbar,
+    .hero,
+    .footer {
+        display: block;
+    }
+
+    .nav-actions {
+        justify-content: stretch;
+        margin-top: 18px;
+    }
+
+    .button {
+        flex: 1 1 180px;
+    }
+
+    .hero {
+        padding: 42px 0 28px;
+    }
+
+    .status-panel {
+        margin-top: 28px;
+    }
+
+    .tool-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer span {
+        display: block;
+        margin-top: 8px;
+    }
 }
 </style>
 
 </head>
 
 <body>
+<main class="page">
+    <header class="topbar">
+        <div class="brand">
+            <div class="mark">G</div>
+            <div>
+                <p class="brand-title">Glorb Tools</p>
+                <p class="brand-subtitle">CLI-inspired registry</p>
+            </div>
+        </div>
 
-<div class="container">
+        <nav class="nav-actions" aria-label="Downloads">
+            <a class="button primary" href="https://github.com/KULEDEVER/glorb/releases/download/uploaded/GLORB.msi">Download Glorb</a>
+            <a class="button" href="https://github.com/KULEDEVER/glorb/releases/download/uploaded/src.7z">Download Source</a>
+        </nav>
+    </header>
 
-<h1>Glorb Tool Registry</h1>
+    <section class="hero" aria-labelledby="page-title">
+        <div>
+            <p class="eyebrow">Tool registry</p>
+            <h1 id="page-title">Fast access to every Glorb command.</h1>
+            <p class="hero-copy">Browse the available helpers, identify the right command group, and download the latest package from one clean interface.</p>
+        </div>
 
-<p>Here is a list of all available tools:</p>
+        <aside class="status-panel" aria-label="Registry status">
+            <h2>Registry Status</h2>
+            <div class="metric"><span>Available tools</span><strong>11</strong></div>
+            <div class="metric"><span>Install package</span><strong>MSI</strong></div>
+            <div class="metric"><span>Source archive</span><strong>7Z</strong></div>
+        </aside>
+    </section>
 
-<div class="tool"><span class="name">aglorb</span> - ADB (Android Debug Bridge tools)</div>
-<div class="tool"><span class="name">awglorb</span> - AWS cloud tools</div>
-<div class="tool"><span class="name">azglorb</span> - Azure cloud tools</div>
-<div class="tool"><span class="name">doglorb</span> - Docker tools</div>
-<div class="tool"><span class="name">docoglorb</span> - Docker Compose tools</div>
-<div class="tool"><span class="name">gcglorb</span> - Google Cloud tools</div>
-<div class="tool"><span class="name">gglorb</span> - Git version control tools</div>
-<div class="tool"><span class="name">ghglorb</span> - GitHub CLI tools</div>
-<div class="tool"><span class="name">glorb</span> - Tool listing / registry viewer</div>
-<div class="tool"><span class="name">kuglorb</span> - Kubernetes tools</div>
-<div class="tool"><span class="name">npglorb</span> - NPM tools</div>
+    <section aria-labelledby="tools-title">
+        <div class="toolbar">
+            <h2 id="tools-title">Available Tools</h2>
+            <span class="tool-count">11 commands</span>
+        </div>
 
-<!-- DOWNLOAD BUTTON -->
-<a class="download-btn" href="./download/GLORB.msi" download>
-Download Glorb
-</a>
+        <div class="tool-grid">
+            <article class="tool"><span class="tool-index">01</span><div><h3 class="tool-name">aglorb</h3><p class="tool-description">ADB and Android Debug Bridge tools.</p></div></article>
+            <article class="tool"><span class="tool-index">02</span><div><h3 class="tool-name">awglorb</h3><p class="tool-description">AWS cloud workflow tools.</p></div></article>
+            <article class="tool"><span class="tool-index">03</span><div><h3 class="tool-name">azglorb</h3><p class="tool-description">Azure cloud workflow tools.</p></div></article>
+            <article class="tool"><span class="tool-index">04</span><div><h3 class="tool-name">doglorb</h3><p class="tool-description">Docker container tools.</p></div></article>
+            <article class="tool"><span class="tool-index">05</span><div><h3 class="tool-name">docoglorb</h3><p class="tool-description">Docker Compose orchestration tools.</p></div></article>
+            <article class="tool"><span class="tool-index">06</span><div><h3 class="tool-name">gcglorb</h3><p class="tool-description">Google Cloud command tools.</p></div></article>
+            <article class="tool"><span class="tool-index">07</span><div><h3 class="tool-name">gglorb</h3><p class="tool-description">Git version control tools.</p></div></article>
+            <article class="tool"><span class="tool-index">08</span><div><h3 class="tool-name">ghglorb</h3><p class="tool-description">GitHub CLI workflow tools.</p></div></article>
+            <article class="tool"><span class="tool-index">09</span><div><h3 class="tool-name">glorb</h3><p class="tool-description">Tool listing and registry viewer.</p></div></article>
+            <article class="tool"><span class="tool-index">10</span><div><h3 class="tool-name">kuglorb</h3><p class="tool-description">Kubernetes operations tools.</p></div></article>
+            <article class="tool"><span class="tool-index">11</span><div><h3 class="tool-name">npglorb</h3><p class="tool-description">NPM package workflow tools.</p></div></article>
+        </div>
+    </section>
 
-<div class="footer">
-Glorb system • CLI-inspired tool registry
-</div>
-
-</div>
-
+    <footer class="footer">
+        <strong>Glorb System</strong>
+        <span>Clean black and green interface for quick command discovery.</span>
+    </footer>
+</main>
 </body>
 </html>

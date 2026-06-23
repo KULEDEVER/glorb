@@ -2,54 +2,95 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>404 - Glorb</title>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap');
+
+:root {
+    --black: #000000;
+    --green: #00ff00;
+    --text: #f2fff2;
+    --muted: #a8b8a8;
+    --line: rgba(0, 255, 0, 0.24);
+}
+
+* {
+    box-sizing: border-box;
+}
+
 body {
     margin: 0;
-    font-family: monospace;
-    background: #0f0f0f;
-    color: #e6e6e6;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 24px;
+    font-family: "Share Tech Mono", Consolas, monospace;
+    background:
+        linear-gradient(180deg, rgba(0, 255, 0, 0.08), transparent 320px),
+        var(--black);
+    color: var(--text);
 }
 
 .box {
-    text-align: center;
+    width: min(100%, 680px);
+    border: 1px solid var(--line);
+    background: rgba(0, 255, 0, 0.045);
+    padding: clamp(24px, 6vw, 44px);
+    box-shadow: 0 0 32px rgba(0, 255, 0, 0.14);
+}
+
+.header {
+    margin-bottom: 20px;
+    color: var(--green);
+    font-size: 15px;
+    text-transform: uppercase;
 }
 
 h1 {
-    color: #ff4d4d;
-    font-size: 48px;
+    margin: 0;
+    color: var(--green);
+    font-size: clamp(72px, 18vw, 136px);
+    line-height: 0.85;
+    letter-spacing: 0;
 }
 
 p {
-    color: #aaa;
+    max-width: 520px;
+    color: var(--muted);
+    font-size: 18px;
+    line-height: 1.6;
 }
 
-code {
-    background: #222;
-    padding: 4px 6px;
-    border-radius: 4px;
-    color: #7CFF6B;
+a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 44px;
+    margin-top: 8px;
+    padding: 11px 16px;
+    border: 1px solid var(--green);
+    color: var(--black);
+    background: var(--green);
+    text-decoration: none;
+    transition: box-shadow 160ms ease, transform 160ms ease;
+}
+
+a:hover,
+a:focus-visible {
+    transform: translateY(-2px);
+    box-shadow: 0 0 28px rgba(0, 255, 0, 0.4);
+    outline: none;
 }
 </style>
-
 </head>
-
 <body>
-
-<div class="box">
-
-<h1>404</h1>
-
-<p>Tool not found in Glorb registry.</p>
-
-<p>Try returning to <code><a href="https://kuledever.github.io/glorb">index.html</a></code></p>
-
-</div>
-
+<main class="box">
+    <div class="header">glorb://error</div>
+    <h1>404</h1>
+    <p>The tool or page you requested was not found in the registry.</p>
+    <a href="https://kuledever.github.io/glorb">Return to registry</a>
+</main>
 </body>
 </html>
